@@ -1,20 +1,20 @@
-variable project_key {
+variable "project_key" {
   description = "The key of the LaunchDarkly project."
   type        = string
 }
 
-variable project_name {
+variable "project_name" {
   description = "The name of the LaunchDarkly project."
   type        = string
 }
 
-variable project_tags {
+variable "project_tags" {
   description = "Tags for the project."
   type        = list(string)
   default     = []
 }
 
-variable environments {
+variable "environments" {
   description = "List of environments to create in the project."
   type = list(object({
     key   = string
@@ -30,7 +30,7 @@ variable environments {
   }))
 }
 
-variable approval_settings {
+variable "approval_settings" {
   description = "Approval settings for the environments."
   type = object({
     can_review_own_request     = bool
@@ -41,13 +41,13 @@ variable approval_settings {
   default = null
 }
 
-variable launchdarkly_access_token {
+variable "launchdarkly_access_token" {
   description = "Your LaunchDarkly personal access token"
   type        = string
   sensitive   = true
 }
-variable launchdarkly_api_url {
+variable "launchdarkly_api_url" {
   description = "The API URL for LaunchDarkly."
   type        = string
   default     = "https://app.launchdarkly.com"
-}  
+}

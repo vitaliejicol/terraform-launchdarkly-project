@@ -1,9 +1,9 @@
-resource launchdarkly_project this {
+resource "launchdarkly_project" "this" {
   key  = var.project_key
   name = var.project_name
   tags = var.project_tags
 
-  dynamic environments {
+  dynamic "environments" {
     for_each = var.environments
 
     content {
@@ -12,7 +12,7 @@ resource launchdarkly_project this {
       color = environments.value.color
       tags  = environments.value.tags
 
-      dynamic approval_settings {
+      dynamic "approval_settings" {
         for_each = lookup(environments.value, "approval_settings", null) != null ? [1] : []
 
         content {
