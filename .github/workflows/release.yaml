@@ -3,16 +3,25 @@ name: Terraform Module Release
 on:
   push:
     tags:
-      - 'v*.*.*'  # e.g. v1.0.0
+      - 'v*.*.*'  # Trigger on version tags like v1.0.0
+  workflow_dispatch:  # Allow manual triggering
 
 jobs:
   release:
-    name: Release
+    name: Release Module
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout main branch
         uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0  # Required to push changes
+
+      - name: Set up Git user
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
 
       - name: Generate Terraform Docs
         uses: terraform-docs/gh-actions@v1
@@ -23,11 +32,13 @@ jobs:
 
       - name: Commit updated docs
         run: |
-          git config user.name "github-actions"
-          git config user.email "github-actions@github.com"
           git add README.md
-          git commit -m "chore(docs): update README with terraform-docs"
-          git push
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "chore(docs): update README with terraform-docs"
+            git push origin main
+          fi
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2

@@ -2,7 +2,7 @@ name: Mark or close stale issues and PRs
 
 on:
   schedule:
-    - cron: '0 0 * * *' # Runs daily at midnight UTC
+    - cron: '0 0 * * *'
 
 jobs:
   mark-stale:
