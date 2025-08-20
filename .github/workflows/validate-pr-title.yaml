@@ -1,0 +1,43 @@
+name: Validate PR title
+
+on:
+  pull_request_target:
+    types:
+      - opened
+      - edited
+      - synchronize
+
+jobs:
+  validate-title:
+    name: Check PR title against Conventional Commits
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Validate PR title
+        uses: amannn/action-semantic-pull-request@v5.5.3
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          # Allowed commit types
+          types: |
+            feat
+            fix
+            docs
+            chore
+            ci
+
+          # Whether a scope is required (false = optional)
+          requireScope: false
+
+          # Enforce subject pattern (e.g. must start with an uppercase letter)
+          subjectPattern: ^[A-Z].+$
+          subjectPatternError: |
+            🚫 The subject "{subject}" in the PR title "{title}" must start with an uppercase letter.
+
+          # Allow WIP PRs to bypass validation
+          wip: true
+
+          # Disable single commit message validation for squash merges
+          validateSingleCommit: false
+            # Custom error message for invalid PR titles
+            

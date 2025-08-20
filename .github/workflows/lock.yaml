@@ -1,0 +1,29 @@
+name: Lock stale issues and PRs
+
+on:
+  schedule:
+    - cron: '50 1 * * *'
+
+jobs:
+  lock-threads:
+    name: Lock closed threads
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Lock inactive issues and PRs
+        uses: dessant/lock-threads@v5
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+          issue-inactive-days: 30
+          issue-comment: >
+            🔒 This issue has been automatically locked because it has been closed for **30 days**.  
+            This helps our maintainers focus on active issues.  
+            If you’re experiencing a similar problem, please open a new issue and fill out the issue template completely.
+
+          pr-inactive-days: 30
+          pr-comment: >
+            🔒 This pull request has been automatically locked because it has been closed for **30 days**.  
+            This helps our maintainers focus on active pull requests.  
+            If this PR relates to a current problem, please open a new issue and complete the template.
+            lock-reason: 'This issue has been automatically locked due to inactivity.'

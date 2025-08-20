@@ -1,0 +1,51 @@
+name: Mark or close stale issues and PRs
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # Runs daily at midnight UTC
+
+jobs:
+  mark-stale:
+    name: Mark or close stale issues/PRs
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Run stale action
+        uses: actions/stale@v9
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+
+          # Number of days of inactivity before marking as stale
+          days-before-stale: 30
+
+          # Number of days after being marked stale to close
+          days-before-close: 10
+
+          # Labels applied when marking as stale
+          stale-issue-label: stale
+          stale-pr-label: stale
+
+          # Messages to post when marking as stale
+          stale-issue-message: |
+            ⚠️ This issue has been automatically marked as **stale** because it has been open for 30 days with no activity.
+            It will be closed in 10 days if no further activity occurs. Remove the `stale` label or comment to keep it open.
+          stale-pr-message: |
+            ⚠️ This pull request has been automatically marked as **stale** because it has been open for 30 days with no activity.
+            It will be closed in 10 days if no further activity occurs. Remove the `stale` label or comment to keep it open.
+
+          # Messages to post when closing
+          close-issue-message: |
+            ❌ This issue was automatically closed after being marked stale for 10 days.
+          close-pr-message: |
+            ❌ This pull request was automatically closed after being marked stale for 10 days.
+
+          # Labels that prevent staleness
+          exempt-issue-labels: bug,wip,on-hold
+          exempt-pr-labels: bug,wip,on-hold
+
+          # Do not mark as stale if part of any milestone
+          exempt-all-milestones: true
+
+          # Automatically delete the branch if PR is closed
+          delete-branch: true
+            # Lock issues/PRs when they are closed
