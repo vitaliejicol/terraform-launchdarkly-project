@@ -24,7 +24,7 @@ jobs:
     runs-on: ubuntu-latest
 
     # Skip running release workflow on forks for semantic-release
-    if: github.repository_owner == 'terraform-aws-modules'
+    if: github.repository_owner == 'terraform-launchdarkly-project'
 
     steps:
       - name: Checkout main branch
