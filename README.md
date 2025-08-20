@@ -48,6 +48,7 @@ module "project" {
     }
   ]
 }
+```
 
 <!-- BEGIN_TF_DOCS -->
 
