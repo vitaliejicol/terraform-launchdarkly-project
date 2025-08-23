@@ -1,7 +1,12 @@
-output "feature_flag_keys" {
-  value = { for k, f in launchdarkly_feature_flag.this : k => f.key }
+output "project_key" {
+  description = "The key of the LaunchDarkly project."
+  value = launchdarkly_project.this.key
 }
-
-output "feature_flag_ids" {
-  value = { for k, f in launchdarkly_feature_flag.this : k => f.id }
+output "project_name" {
+  description = "The name of the LaunchDarkly project."
+  value = launchdarkly_project.this.name
+}
+output "project_tags" {
+  description = "values of the tags for the project."
+  value = launchdarkly_project.this.tags
 }

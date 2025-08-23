@@ -1,32 +1,27 @@
-resource "launchdarkly_feature_flag" "this" {
-  for_each = var.feature_flags
+resource "launchdarkly_project" "this" {
+  key  = var.project_key
+  name = var.project_name
+  tags = var.project_tags
 
-  project_key     = each.value.project_key
-  key             = each.value.key
-  name            = each.value.name
-  description     = try(each.value.description, null)
-  variation_type  = each.value.variation_type
-  tags            = try(each.value.tags, null)
+  dynamic "environments" {
+    for_each = var.environments
 
-  dynamic "variations" {
-    for_each = each.value.variations
     content {
-      name        = variations.value.name
-      value       = variations.value.value
-      description = try(variations.value.description, null)
-    }
-  }
+      key   = environments.value.key
+      name  = environments.value.name
+      color = environments.value.color
+      tags  = environments.value.tags
 
-  dynamic "client_side_availability" {
-    for_each = each.value.client_side_availability != null ? [each.value.client_side_availability] : []
-    content {
-      using_environment_id = try(client_side_availability.value.using_environment_id, null)
-      using_mobile_key     = try(client_side_availability.value.using_mobile_key, null)
-    }
-  }
+      dynamic "approval_settings" {
+        for_each = lookup(environments.value, "approval_settings", null) != null ? [1] : []
 
-  defaults {
-    on_variation  = each.value.defaults.on_variation
-    off_variation = each.value.defaults.off_variation
+        content {
+          can_review_own_request     = environments.value.approval_settings.can_review_own_request
+          can_apply_declined_changes = environments.value.approval_settings.can_apply_declined_changes
+          min_num_approvals          = environments.value.approval_settings.min_num_approvals
+          required_approval_tags     = environments.value.approval_settings.required_approval_tags
+        }
+      }
+    }
   }
 }
