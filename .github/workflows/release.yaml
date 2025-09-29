@@ -6,11 +6,8 @@ permissions:
 
 on:
   push:
-    tags:
-      - 'v*.*.*'  # Trigger on version tags like v1.0.0
     branches:
       - main
-      - master
     paths:
       - '**/*.tpl'
       - '**/*.py'
