@@ -1,7 +1,7 @@
 {
     "branches": [
       "main",
-      "master"
+        {"name": "beta", "prerelease": true}
     ],
     "tagFormat": "v${version}",
     "ci": false,
