@@ -15,8 +15,7 @@ variable "project_tags" {
 }
 
 variable "environments" {
-  description = "List of environments to create in the project."
-  type = list(object({
+  type = map(object({
     key   = string
     name  = string
     color = string
@@ -29,6 +28,8 @@ variable "environments" {
     }))
   }))
 }
+
+
 
 variable "launchdarkly_access_token" {
   description = "Your LaunchDarkly personal access token"
