@@ -16,7 +16,6 @@ resource "launchdarkly_project" "this" {
         content {
           can_review_own_request     = environments.value.approval_settings.can_review_own_request
           can_apply_declined_changes = environments.value.approval_settings.can_apply_declined_changes
-          # Only set min_num_approvals if it’s passed in
           min_num_approvals          = try(environments.value.approval_settings.min_num_approvals, null)
           required_approval_tags     = environments.value.approval_settings.required_approval_tags
         }

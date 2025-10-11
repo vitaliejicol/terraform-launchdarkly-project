@@ -21,7 +21,7 @@ This module is designed for flexibility, reusability, and clean output. It suppo
 
 ```hcl
 module "project" {
-  source = "github.com/<your-org>/terraform-<provider>-project"
+  source = "https://github.com/vjicol-public-org/terraform-launchdarkly-project.git"
 
   project_key = "example-project"
   project_name = "Example Project"
@@ -52,7 +52,6 @@ module "project" {
 
 <!-- BEGIN_TF_DOCS -->
 
-
 ## Resources
 
 | Name | Type |
@@ -69,7 +68,7 @@ module "project" {
 | <a name="input_project_tags"></a> [project\_tags](#input\_project\_tags) | Tags for the project. | `list(string)` | `[]` | no |
 
 ## Outputs
-
+sx
 | Name | Description |
 |------|-------------|
 | <a name="output_project_key"></a> [project\_key](#output\_project\_key) | The key of the LaunchDarkly project. |
