@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.2](https://github.com/vitaliejicol/terraform-launchdarkly-project/compare/v1.0.1...v1.0.2) (2025-12-07)
+
+
+### Bug Fixes
+
+* removed livecycle ([42a58de](https://github.com/vitaliejicol/terraform-launchdarkly-project/commit/42a58de0481d84d204c51a6cc9c214675e414baa))
+
 ## [1.0.1](https://github.com/vitaliejicol/terraform-launchdarkly-project/compare/v1.0.0...v1.0.1) (2025-12-07)
 
 
