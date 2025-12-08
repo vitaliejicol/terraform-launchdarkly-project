@@ -34,11 +34,8 @@ module "project" {
       color = "eeeeee"
       tags  = ["terraform"]
       approval_settings = {
-        required                   = true
         can_review_own_request     = false
         can_apply_declined_changes = false
-        min_num_approvals          = 3
-        required_approval_tags     = []
       }
     },
     {

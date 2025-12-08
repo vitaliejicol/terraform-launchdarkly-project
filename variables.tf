@@ -14,19 +14,43 @@ variable project_tags {
   default     = []
 }
 
-variable environments {
+variable "environments" {
   type = map(object({
     key   = string
     name  = string
     color = string
-    tags  = list(string)
+
+    tags                 = optional(list(string))
+    confirm_changes      = optional(bool)
+    critical             = optional(bool)
+    default_track_events = optional(bool)
+    default_ttl          = optional(number)
+    require_comments     = optional(bool)
+    secure_mode          = optional(bool)
+
     approval_settings = optional(object({
-      can_review_own_request     = bool
-      can_apply_declined_changes = bool
-      min_num_approvals          = number
-      required_approval_tags     = list(string)
+      auto_apply_approved_changes = optional(bool)
+      can_review_own_request      = optional(bool)
+      can_apply_declined_changes  = optional(bool)
+      min_num_approvals           = optional(number)
+
+      # Mutually exclusive rule: either these tags OR required = true
+      # required               = optional(bool)
+      # required_approval_tags = optional(list(string))
+
+      service_kind   = optional(string)
+      service_config = optional(map(string))
     }))
   }))
+}
+
+
+variable "default_client_side_availability" {
+  type = object({
+    using_environment_id = bool
+    using_mobile_key     = bool
+  })
+  default = null
 }
 
 variable launchdarkly_access_token {
