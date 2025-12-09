@@ -34,8 +34,9 @@ resource "launchdarkly_project" "this" {
           can_apply_declined_changes  = try(environments.value.approval_settings.can_apply_declined_changes, null)
           min_num_approvals           = try(environments.value.approval_settings.min_num_approvals, null)
 
-          # required               = try(environments.value.approval_settings.required, null)
-          # required_approval_tags = try(environments.value.approval_settings.required_approval_tags)
+          required               = try(environments.value.approval_settings.required, null)
+          required_approval_tags = try(environments.value.approval_settings.required_approval_tags, null)
+
 
           service_kind   = try(environments.value.approval_settings.service_kind, null)
           service_config = try(environments.value.approval_settings.service_config, null)
