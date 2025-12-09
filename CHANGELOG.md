@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.3](https://github.com/terraform-launchdarkly-modules/terraform-launchdarkly-project/compare/v1.0.2...v1.0.3) (2025-12-09)
+
+
+### Bug Fixes
+
+* Changed the source in the module ([663f9b6](https://github.com/terraform-launchdarkly-modules/terraform-launchdarkly-project/commit/663f9b6af03fe3d7db9ac389036963a0f53ab2ce))
+* fixed approval settings ([33721ec](https://github.com/terraform-launchdarkly-modules/terraform-launchdarkly-project/commit/33721ecb6dcbe8fb1563d34d906e3a9af0959918))
+
 ## [1.0.2](https://github.com/vitaliejicol/terraform-launchdarkly-project/compare/v1.0.1...v1.0.2) (2025-12-07)
 
 
