@@ -1,9 +1,9 @@
-resource launchdarkly_project this {
+resource "launchdarkly_project" "this" {
   key  = var.project_key
   name = var.project_name
   tags = var.project_tags
 
-  dynamic default_client_side_availability {
+  dynamic "default_client_side_availability" {
     for_each = var.default_client_side_availability != null ? [1] : []
     content {
       using_environment_id = var.default_client_side_availability.using_environment_id
@@ -11,7 +11,7 @@ resource launchdarkly_project this {
     }
   }
 
-  dynamic environments {
+  dynamic "environments" {
     for_each = var.environments
     content {
       key   = environments.value.key
@@ -26,7 +26,7 @@ resource launchdarkly_project this {
       require_comments     = try(environments.value.require_comments, null)
       secure_mode          = try(environments.value.secure_mode, null)
 
-      dynamic approval_settings {
+      dynamic "approval_settings" {
         for_each = try(environments.value.approval_settings, null) != null ? [1] : []
         content {
           auto_apply_approved_changes = try(environments.value.approval_settings.auto_apply_approved_changes, null)
