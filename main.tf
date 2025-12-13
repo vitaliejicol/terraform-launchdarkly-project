@@ -37,7 +37,6 @@ resource "launchdarkly_project" "this" {
           required               = try(environments.value.approval_settings.required, null)
           required_approval_tags = try(environments.value.approval_settings.required_approval_tags, null)
 
-
           service_kind   = try(environments.value.approval_settings.service_kind, null)
           service_config = try(environments.value.approval_settings.service_config, null)
         }
